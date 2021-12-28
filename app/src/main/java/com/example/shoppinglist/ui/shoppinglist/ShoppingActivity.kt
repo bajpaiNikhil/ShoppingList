@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoppinglist.R
@@ -23,9 +21,9 @@ class ShoppingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping)
 
-        val database = ShoppingDatabase(this)
+        val database   = ShoppingDatabase(this)
         val repository = ShoppingRepository(database)
-        val factory = ShoppingViewModelFactory(repository)
+        val factory    = ShoppingViewModelFactory(repository)
 
         viewModel = ViewModelProviders.of(this , factory).get(ShoppingViewModel::class.java)
 
@@ -35,19 +33,10 @@ class ShoppingActivity : AppCompatActivity() {
         rvShoppingItems.adapter = adapter
 
         viewModel.getAllShoppingItem().observe(this , Observer {
+
             adapter.item = it
             adapter.notifyDataSetChanged()
         })
-
-
-
-//        fab.setOnClickListener {
-//            AddShoppingItemDialog(this, object : AddDialogListener{
-//                override fun onAddButtonClicked(item: ShoppingItem) {
-//                    viewModel.upsert(item)
-//                }
-//            }).show()
-//        }
 
     }
 

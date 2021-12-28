@@ -17,7 +17,7 @@ abstract class ShoppingDatabase:RoomDatabase() {
     companion object{
 
         @Volatile
-        private var instance : ShoppingDatabase?= null
+        private var instance : ShoppingDatabase? = null
         private var Lock = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(Lock){
